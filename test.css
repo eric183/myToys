@@ -1,0 +1,309 @@
+@charset "utf-8";
+
+/*reset Start*/
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+p,
+blockquote,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+pre,
+form,
+fieldset,
+legend,
+button,
+input,
+textarea,
+th,
+td {
+    margin: 0;
+    padding: 0;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+    font: 12px/20px 'Microsoft Yahei', 'Helvetica Neue', Helvetica, STHeiTi, Arial, sans-serif;
+    color: #242424;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: 100%;
+    font-weight: normal;
+}
+
+img {
+    max-width: 100%;
+    border: 0;
+    vertical-align: middle;
+    -ms-interpolation-mode: bicubic;
+}
+
+i {
+    font-style: normal;
+}
+
+address,
+cite,
+dfn,
+em,
+var {
+    font-style: normal;
+}
+
+code,
+kbd,
+pre,
+samp {
+    font-family: courier new, courier, monospace;
+}
+
+small {
+    font-size: 12px;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+    color: #2d2c2b;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:active {
+    border: none;
+}
+
+
+/*去掉链接的虚线框*/
+
+a {
+    blr: expression(this.onFocus=this.blur());
+    outline: none;
+}
+
+a:focus {
+    -moz-outline-style: none;
+}
+
+legend {
+    color: #000;
+}
+
+fieldset,
+img {
+    border: 0;
+}
+
+button,
+input,
+select,
+textarea {
+    font-size: 100%;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    height: 100%;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+input::-moz-placeholder,
+textarea::-moz-placeholder {
+    color: #cccccc;
+}
+
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+    color: #cccccc;
+}
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+    color: #cccccc;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: #F3F3F3;
+}
+
+.g_ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+}
+
+
+/**课程列表————midy**/
+
+.course-list {
+    width: 100%;
+    padding: 0 0 0 10px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+.course-list li {
+    width: 100%;
+    overflow: hidden;
+    border-bottom: 1px solid #e7e7e7;
+    padding: 15px 0 10px 0;
+    position: relative;
+}
+
+.course-list li a {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+}
+
+.course-list li .course-list-img {
+    width: 40%;
+    overflow: hidden;
+    float: left;
+    border: 1px solid #e7e7e7;
+}
+
+.course-list li .course-list-img img {
+    width: 100%;
+}
+
+.course-list-title {
+    width: 48%;
+    float: left;
+    margin-left: 10px;
+}
+
+.course-list-title strong {
+    width: 100%;
+    display: block;
+    font-size: 16px;
+    padding-bottom: 4px;
+    color: #3b4248;
+    margin-top: 10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.course-list-title p,
+.course-list-title p span {
+    font-size: 14px;
+    color: #666;
+    line-height: 25px;
+}
+
+.course-list-title p span {
+    float: left;
+}
+
+.hot-course {
+    width: 160px;
+    height: 20px;
+    padding-top: 5px;
+    background-color: #53A6F6;
+    text-align: center;
+    position: absolute;
+    color: #fff;
+    line-height: 16px;
+    top: 4px;
+    right: -60px;
+    transform: rotate(50deg);
+}
+
+.hot-course span {
+    display: block;
+    width: 175px;
+    line-height: 14px;
+    text-align: center;
+    font-weight: normal;
+    font-size: 16px;
+    color: #fff;
+}
+
+.course-list li .price,
+.catalog-title .price {
+    color: #50A7F7;
+}
+
+.course-list li .old-price {
+    color: #999;
+    padding-right: 4px;
+    padding-left: 4px;
+}
+
+.course-list li .num {
+    padding-left: 4px;
+}
+
+.buy-course {
+    border: none;
+    border-radius: 4px;
+    background-color: #53A6F6;
+    color: #fff;
+    padding: 2px 6px;
+    font-size: 14px;
+    margin-right: 14px;
+}
+

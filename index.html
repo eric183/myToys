@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="app/lib/angular.min.js"></script>
+    <!-- <script src="mqtt.js"></script> -->
+    <style>
+    #tab div {
+        display: none;
+    }
+    
+    .dragDiv {
+        position: relative;
+        font-size: 14px;
+        transition: top 1s;
+    }
+    
+    input {
+        border: 1px solid red;
+        border-radius: 15px;
+        padding: 5px 8px;
+        outline: none;
+    }
+    
+    .father {
+        text-align: center;
+    }
+    
+    .father ul {
+        list-style: none;
+    }
+    
+    li {
+        overflow: hidden;
+        margin-bottom: 10px;
+        text-align: left;
+    }
+    
+    li button {
+        font-size: 20px;
+        float: right;
+        margin-right: 330px;
+        color: red;
+        font-weight: bolder;
+
+    }
+    
+    .mypuser {
+        position: fixed;
+        top: 360px;
+        right: 30px;
+    }
+
+    .joker {
+        animation: my-joker 0.5s forwards ease-in-out;
+    }
+    
+    @keyframes my-joker {
+        0 {
+            font-size: 14px;
+        }
+        100% {
+            font-size: 56px;
+        }
+    }
+
+    .rotates {
+        animation: spin 0.5s forwards ease-in-out;
+    }
+
+    @keyframes spin {
+        0 {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(90deg);
+        }
+    }
+    </style>
+</head>
+
+<body ng-app="Eric">
+    <div ng-controller="eric-ctrl" class="father">
+        <div class="dragDiv">
+            <span drag-ele john="john">
+                {{john}}
+            </span>
+        </div>
+        <ul>
+            <li>
+                <a href="#home">主页</a>
+                <a href="#about">关于</a>
+                <a href="#history">{{show}}</a>
+            </li>
+        </ul>
+        <input type="text" my-view show="show" myarr="myarr" showarr="showarr">
+        <div>
+            <ul>
+                <li ng-repeat='v in showarr'>
+                    {{v.name}}
+                    <button ng-click="myarr.splice($index, 1)">×</button>
+                </li>
+            </ul>
+        </div>
+        <div class="mypuser">
+            <label for="puser">
+                <input id="pusher" type="text" ng-model="pusher">
+            </label>
+            <button button-joke ng-click="puserHandle(pusher)">点我加词条</button>
+        </div>
+    </div>
+    <script>
+    var app = angular.module('Eric', []);
+    app.controller('eric-ctrl', function($scope) {
+        $scope.kitty = '你好';
+        $scope.currentAge = 0;
+        $scope.show = false;
+        $scope.john = '我可以被拖哟!';
+        $scope.myarr = [{
+            name: '江哈哈'
+        }, {
+            name: '江泽明'
+        }, {
+            name: '江小鱼'
+        }, {
+            name: '周渝民'
+        }, {
+            name: '周恩来'
+        }, {
+            name: '狂之臣'
+        }, {
+            name: '匡志宸'
+        }, {
+            name: '匡一刀'
+        }, {
+            name: '匡一桶'
+        }, {
+            name: '匡一发入魂'
+        }, {
+            name: '匡一刀仁波切'
+        }, {
+            name: '匡刀刀'
+        }, {
+            name: '匡刀刀仁波切'
+        }, {
+            name: '匡爸爸别开枪，是我啊'
+        }, {
+            name: '砍死你们哟'
+        }];
+        $scope.puserHandle = function(pusher) {
+            if (!pusher) return;
+            $scope.myarr.push({
+                name: pusher
+            });
+            pusher = '';
+            alert('这你都能点到？')
+        };
+        $scope.showarr = [];
+
+        $scope.$watchCollection('myarr', function(newArr, oldArr) {
+            angular.copy($scope.myarr, $scope.showarr);
+        });
+
+    });
+    app.directive('dragEle', function() {
+        return {
+            scope: {
+                john: '='
+            },
+            link: function(scope, ele, attrs) {
+                ele.on('click', function() {
+                    console.log('被点了呢')
+                });
+                ele.on('mouseover', function() {
+                    scope.john = '骗你的  :)';      
+                    scope.$apply();
+                    ele.addClass('joker');
+                    ele.parent().addClass('rotates');
+                });
+                // ele.on('mouseout', function() {
+                //     ele.removeClass('joker');
+                //     scope.john = '我可以被拖哟!';
+                //     attrs.style = 'animationDirection: reverse'
+                //     scope.$apply();
+                // })
+            }
+        }
+    })
+    app.directive('myView', function() {
+        return {
+            scope: {
+                show: '=',
+                myarr: 　 '=',
+                showarr: '='
+            },
+            link: function(scope, ele, attrs) {
+                ele.on('focus', function() {
+                    scope.$apply(scope.show = true);
+                });
+                ele.on('blur', function() {
+                    scope.$apply(scope.show = false);
+                });
+                ele.on('input', function() {
+                    if (!ele.val()) {
+                        scope.showarr = scope.showarr.concat(scope.myarr);
+                    };
+                    scope.showarr = [];
+                    scope.myarr.forEach(function(i) {
+                        if (i.name.indexOf(ele.val()) !== -1) {
+                            console.log(scope.myarr.indexOf(i));
+                            scope.showarr = scope.showarr.concat(scope.myarr.slice(scope.myarr.indexOf(i), scope.myarr.indexOf(i) + 1));
+                            scope.$apply();
+                        }
+
+                    })
+                });
+            }
+        }
+    });
+
+    app.directive('buttonJoke', function() {
+        return {
+            link: function(scope, ele, attrs) {
+                var father = ele.parent();
+                ele.on('mouseover', function(){
+                    father.css({top: Math.random() * 500 + 'px', left: Math.random() * 500 + 'px'})            
+                })
+            }
+        }
+    })
+
+    </script>
+
+
+</body>
+
+</html>
